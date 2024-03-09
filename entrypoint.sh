@@ -9,5 +9,5 @@ sleep 5
 # Join the Husarnet network
 husarnet join ${HUSARNET_JOIN_CODE} ${HUSARNET_HOSTNAME}
 
-# Start the Flask application
-exec python main.py
+# Proceed to execute CMD from Dockerfile (Gunicorn to serve the Flask app)
+exec "$@"
