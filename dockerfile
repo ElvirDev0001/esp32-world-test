@@ -33,5 +33,5 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-# Command to run your application, e.g., a Flask or Django app
-CMD ["python", "main.py"]
+# Use Gunicorn to serve the Flask app; adjust the number of workers as needed
+CMD ["gunicorn", "-w", "4", "main:app", "-b", "0.0.0.0:8000"]
