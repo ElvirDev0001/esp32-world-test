@@ -3,8 +3,8 @@ FROM python:3.12.1
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1 \
-    HUSARNET_JOIN_CODE="your_husarnet_join_code" \
-    HUSARNET_HOSTNAME="your_preferred_hostname"
+    HUSARNET_JOIN_CODE="fc94:b01d:1803:8dd8:b293:5c7d:7639:932a/QMEiPq5h884GkJy3FuRqCW" \
+    HUSARNET_HOSTNAME="awesome-chips"
 
 # Set the working directory in the container
 WORKDIR /app
