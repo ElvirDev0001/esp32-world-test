@@ -1,0 +1,9 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+__pycache__/
+*.pyc
+.env
+.idea
+venv/
+starlit-granite-415310-*.json
