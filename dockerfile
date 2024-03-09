@@ -13,15 +13,12 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Husarnet dependencies
-RUN apt-get update && apt-get install -y \
-    sudo \
-    systemd \
-    && rm -rf /var/lib/apt/lists/*
-
-# Download and install Husarnet
-RUN curl https://install.husarnet.com/install.sh | bash -s -- --verbose
-
+# Install Husarnet dependencies and Husarnet itself
+# Adding apt-get install commands in a single RUN to reduce layers and using DEBIAN_FRONTEND=noninteractive to avoid tzdata prompt
+RUN apt-get update && apt-get install -y sudo systemd gnupg2 curl && \
+    curl https://install.husarnet.com/install.sh | bash -s -- --verbose && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Copy the rest of your application's code
 COPY . .
@@ -29,8 +26,7 @@ COPY . .
 # Expose the port your app runs on
 EXPOSE 8000
 
-# Add a startup script to initiate Husarnet connection before starting your app
-COPY entrypoint.sh /entrypoint.sh
+# Ensure entrypoint.sh is executable
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
