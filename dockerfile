@@ -4,7 +4,7 @@ FROM python:3.12.1
 # Set environment variables
 ENV PYTHONUNBUFFERED=1 \
     HUSARNET_JOIN_CODE="fc94:b01d:1803:8dd8:b293:5c7d:7639:932a/QMEiPq5h884GkJy3FuRqCW" \
-    HUSARNET_HOSTNAME="awesome-chips"
+    HUSARNET_HOSTNAME="railway"
 
 # Set the working directory in the container
 WORKDIR /app
@@ -17,6 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Adding apt-get install commands in a single RUN to reduce layers and using DEBIAN_FRONTEND=noninteractive to avoid tzdata prompt
 RUN apt-get update && apt-get install -y sudo systemd gnupg2 curl && \
     curl https://install.husarnet.com/install.sh | bash -s -- --verbose && \
+    echo "HUSARNET INSTALLED."
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
